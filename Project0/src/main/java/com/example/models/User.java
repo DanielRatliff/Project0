@@ -1,10 +1,15 @@
 package com.example.models;
 
+
 public class User {
 	private String firstName;
 	private String lastName;
 	private String username;
 	private String password;
+	
+	public User() {
+		super();
+	}
 	public User(String firstName, String lastName, String password) {
 		super();
 		this.firstName = firstName;
@@ -32,6 +37,10 @@ public class User {
 	}
 	public String getUsername() {
 		return username;
+	}
+	@Override
+	public String toString() {
+		return "First Name: " + this.firstName + " Last Name: "+this.lastName + " Username: " + this.username;
 	}
 
 }
