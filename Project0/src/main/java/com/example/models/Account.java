@@ -1,24 +1,32 @@
 package com.example.models;
 
 public class Account {
-	private String usernmame;
-	private String accountPass;
-	private int accountNumber;
+	private int id;
 	private double balance;
-	public Account() {
+	private int uId;
+	private int pin;
+	public Account(int id , double balance, int uId, int pin) {
 		super();
+		this.id=id;
+		this.balance=balance;
+		this.uId=uId;
+		this.pin=pin;
 	}
-	public Account(String usernmame, String accountPass, double balance) {
+	public Account(double balance,int uId, int pin) {
 		super();
-		this.usernmame = usernmame;
-		this.accountPass = accountPass;
-		this.balance = balance;
+		this.balance=balance;
+		this.uId=uId;
+		this.pin=pin;
 	}
-	public String getAccountPass() {
-		return accountPass;
+	public int getId() {
+		return id;
 	}
-	public void setAccountPass(String accountPass) {
-		this.accountPass = accountPass;
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", balance=" + balance + ", uId=" + uId + "]";
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public double getBalance() {
 		return balance;
@@ -26,11 +34,17 @@ public class Account {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	public String getUsernmame() {
-		return usernmame;
+	public int getuId() {
+		return uId;
 	}
-	public int getAccountNumber() {
-		return accountNumber;
+	public void setuId(int uId) {
+		this.uId = uId;
+	}
+	public int getPin() {
+		return pin;
+	}
+	public void setPin(int pin) {
+		this.pin = pin;
 	}
 	
 }

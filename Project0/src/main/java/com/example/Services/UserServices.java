@@ -3,80 +3,47 @@ package com.example.Services;
 import com.example.models.User;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.dao.FileIO;
+import com.example.dao.UserDao;
+import com.example.dao.UserDaoDB;
 import com.example.exceptions.InvalidCredentialsException;
 import com.example.exceptions.UserDoesNotExistexception;
 import com.example.exceptions.UsernameAlreadyExistsException;
 
 public class UserServices {
-	private String file;
-	private FileIO<User> io;
+	private UserDao uDao;
 	
-	public UserServices(String file) {
-		this.file = file;
-		this.io = new FileIO<User>(file);
+	public UserServices(UserDao u) {
+		this.uDao = u;
+		
 	}
 	
-	public User signUp(String firstName, String lastName, String password) {
-		ArrayList<User> users;
+	public User signUp(String first, String last, String email, String password)throws InvalidCredentialsException{
+		User u = new User(first,last,email,password);
 		
 		try {
-			users = io.readObject();
-		}catch(FileNotFoundException e) {
-			users = new ArrayList<User>();
-		}catch(Exception e) {
-			e.printStackTrace();
-			return null;
+			uDao.createUser(u);
+		}catch(SQLException e) {
+			throw new InvalidCredentialsException();
 		}
-		
-		User u = new User(firstName,lastName,password);
-		
-		for(int i=0; i < users.size();i++) {
-			if(users.get(i).getUsername().equals(u.getUsername())) {
-				throw new UsernameAlreadyExistsException();
-			}
-		}
-		users.add(u);
-		io.writeObject(users);
 		return u;
 	}
-	public User login(String username,String password) {
-		ArrayList<User> users;
+	
+	public User signIn(String username, String password)throws InvalidCredentialsException{
 		
-		try {
-			users = io.readObject();
-		}catch(FileNotFoundException e) {
-			users = new ArrayList<User>();
-		}catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		User u = uDao.getUserByUsername(username);
 		
-		for(int i=0;i<users.size();i++) {
-			if(users.get(i).getUsername().equals(username)) {
-				if(users.get(i).getPassword().equals(password)) {
-					System.out.println("Welcome!:)\n" + username + " was successfully logged in");
-					return users.get(i);
-				}
-				throw new InvalidCredentialsException();
-			}
+		if(u.getId()==0) {
+			throw new InvalidCredentialsException();
+		}else if (!u.getPassword().equals(password)) {
+			throw new InvalidCredentialsException();
+		}else {
+			return u;
 		}
-		throw new UserDoesNotExistexception();
-	}
-	public List<User> getAllUsers(){
-		ArrayList<User> users;
-		try {
-			users=io.readObject();
-		}catch(FileNotFoundException e) {
-			users = new ArrayList<User>();
-		}catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		return users;
 	}
 	
 }
