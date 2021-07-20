@@ -9,6 +9,7 @@ public class User {
 	private String email;
 	private String username;
 	private String password;
+	private String access;
 	
 	public User() {
 		super();
@@ -21,7 +22,7 @@ public class User {
 		this.password = password;
 	}
 	
-	public User(int id, String firstName, String lastName, String email, String username, String password) {
+	public User(int id, String firstName, String lastName, String email, String username, String password,String access) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -29,6 +30,13 @@ public class User {
 		this.email = email;
 		this.username = username;
 		this.password = password;
+		this.access = access;
+	}
+	public String getAccess() {
+		return access;
+	}
+	public void setAccess(String access) {
+		this.access = access;
 	}
 	public String getFirstName() {
 		return firstName;

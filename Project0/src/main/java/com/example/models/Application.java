@@ -3,41 +3,51 @@ package com.example.models;
 import java.util.Random;
 
 public class Application {
-	private String username;
+	private int id;
+	private String status;
+	private int userId;
 	private double startBalance;
-	private boolean approved = false;
-	private int applicationID;
+	
 	public Application() {
 		super();
 	}
-	public Application(String username, double startBalance) {
+	public Application(int id, String status, int userId, double startBalance) {
 		super();
-		this.username = username;
+		this.id = id;
+		this.status = status;
+		this.userId = userId;
 		this.startBalance = startBalance;
-		this.applicationID = (new Random().nextInt(9000)+1000);
 	}
-	public int getApplicationID() {
-		return applicationID;
+	public Application(int userId, double startBalance) {
+		super();
+		this.userId=userId;
+		this.startBalance = startBalance;
 	}
-	public void setApplicationID(int applicationID) {
-		this.applicationID = applicationID;
+	public int getId() {
+		return id;
 	}
-	public String getUsername() {
-		return username;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public double getStartBalance() {
 		return startBalance;
 	}
-	public boolean isApproved() {
-		return approved;
-	}
-	public void setApproved(boolean approved) {
-		this.approved = approved;
-	}
-	@Override
-	public String toString() {
-		return "Username: " + username + "Starting balance: " + startBalance + "\n Current Status: " + approved;
+	public void setStartBalance(double startBalance) {
+		this.startBalance = startBalance;
 	}
 	
+		
 	
 }

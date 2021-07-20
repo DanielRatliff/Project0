@@ -5,6 +5,9 @@ public class Account {
 	private double balance;
 	private int uId;
 	private int pin;
+	public Account() {
+		super();
+	}
 	public Account(int id , double balance, int uId, int pin) {
 		super();
 		this.id=id;

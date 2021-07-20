@@ -7,12 +7,15 @@ import com.example.models.Application;
 import com.example.models.User;
 
 public interface ApplicationDao {
-	List<Application> getAllUsers();
+	List<Application> getAllApplications();
 
-	User getUserByUsername(String username);
+	Application getApplicationByUserId(int userId);
 
-	void createApplication(User u) throws SQLException;
+	void createApplication(int userId,double startBalance) throws SQLException;
 
-	void updateApplication(User u);
+	void updateApplication(Application a);
+	
+	void removeApplication(Application a);
+	
 
 }

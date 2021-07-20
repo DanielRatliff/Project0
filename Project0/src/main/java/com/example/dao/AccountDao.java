@@ -10,6 +10,6 @@ public interface AccountDao {
 	List<Account> getAllAccounts();
 	void createAccount(Account a)throws SQLException;
 	void updateAccount(Account a);
-	List<Account> getUserAccounts(User u);
-	
+	List<Account> getUserAccounts(int userId);
+	Account getAccountById(int id);
 }
