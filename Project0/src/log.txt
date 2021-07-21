@@ -1,0 +1,2 @@
+2021-07-21 08:35:23 INFO  Logging:59 - User deposited successfully
+2021-07-21 08:36:13 INFO  Logging:43 - User withdrew successfully

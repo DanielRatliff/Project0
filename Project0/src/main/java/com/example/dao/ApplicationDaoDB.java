@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.models.Application;
-import com.example.models.User;
 import com.example.utils.ConnectionUtil;
 
 public class ApplicationDaoDB implements ApplicationDao{
@@ -41,6 +40,7 @@ public class ApplicationDaoDB implements ApplicationDao{
 		String sql = "SELECT * FROM application WHERE customer_id = "+ userId;
 		Statement s = con.createStatement();
 		ResultSet rs = s.executeQuery(sql);
+		rs.next();
 		a.setId(rs.getInt(1));
 		a.setStatus(rs.getString(2));
 		a.setUserId(rs.getInt(3));
@@ -57,7 +57,7 @@ public class ApplicationDaoDB implements ApplicationDao{
 	public void createApplication(int userId, double startBalance) throws SQLException {
 		try {
 		Connection con = conUtil.getConnection();
-		String sql = "INSERT INTO application(customer_id,balance) VALUES (?,?)";
+		String sql = "INSERT INTO application(customer_id,start_balance) VALUES (?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, userId);
@@ -88,9 +88,13 @@ public class ApplicationDaoDB implements ApplicationDao{
 	public void removeApplication(Application a) {
 		try {
 			Connection con = conUtil.getConnection();
-			String sql = "DELETE FROM application WHERE account_id = "+a.getId();
-			Statement s = con.createStatement();
-			s.executeQuery(sql);
+			String sql = "DELETE FROM application WHERE application_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, a.getId());
+			
+			ps.execute();
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

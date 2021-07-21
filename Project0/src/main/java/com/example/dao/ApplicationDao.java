@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.example.models.Application;
-import com.example.models.User;
 
 public interface ApplicationDao {
 	List<Application> getAllApplications();
